@@ -2,16 +2,21 @@
 	<h1>{{ foto.titulo }}</h1>
 </div>
 
-<form name="formulario" class="row" ng-submit="salvar()">
+<p ng-show="mensagem.length" class="alert alert-info">{{ mensagem }}</p>
+
+<form novalidate name="formulario" class="row" ng-submit="salvar()">
 	<div class="col-md-6">
 		<div class="form-group">
 			<label for="">Título</label>
-			<input type="text" ng-model="foto.titulo" name="titulo" class="form-control">
+			<input type="text" ng-model="foto.titulo" name="titulo" class="form-control" required ng-maxlength="20">
+      <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.titulo.$error.required">Título obrigatório</span>
+      <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.titulo.$error.maxlength">Deve ter no máximo 20 caracteres</span>
 		</div>
 
 		<div class="form-group">
 			<label for="">URL</label>
-			<input type="text" ng-model="foto.url" name="url" class="form-control">
+			<input type="text" ng-model="foto.url" name="url" class="form-control" required>
+      <span class="form-control alert-danger" ng-show="formulario.$submitted && formulario.url.$error.required">URL obrigatório</span>
 		</div>
 
 		<div class="form-group">
@@ -19,7 +24,7 @@
 			<textarea ng-model="foto.descricao" name="descricao" class="form-control"></textarea>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Salvar</button>
+		<button ng-disabled="formulario.$invalid" type="submit" class="btn btn-primary">Salvar</button>
 		<a href="/" class="btn btn-default">Voltar</a>
 	</div>
 	<div class="col-md-6">
