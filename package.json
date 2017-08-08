@@ -1,13 +1,13 @@
 {
   "name": "alurapic",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aprender sobre a estrutura básica do Angular 1.x",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Ademílson F. Tonato <ademilsonft@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.12.3",
