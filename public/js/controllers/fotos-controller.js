@@ -1,28 +1,23 @@
-angular.module('alurapic').controller('FotosController', function($scope, $http) {
-	let serverURL = 'v1/fotos'
+angular.module('alurapic').controller('FotosController', function($scope, recursoFoto) {
 
 	$scope.fotos = []
 	$scope.filtro = ''
 
-	$http.get(serverURL)
-	.success( function(fotos){
-		$scope.fotos = fotos;
-	})
-	.error( function(err) {
-		console.warn(err)
-	})
+  recursoFoto.query( function(fotos){
+    $scope.fotos = fotos;
+  }, function(err) {
+    console.warn(err)
+  })
 
   $scope.deletar = function(foto) {
-    $http.delete('v1/fotos/' + foto._id)
-    .success( function(fotos){
 
+    recursoFoto.delete({fotoId : foto._id}, function(fotos){
       var indexFoto = $scope.fotos.indexOf(foto)
       $scope.fotos.splice(indexFoto, 1)
 
       $scope.mensagem = 'Foto deletada com sucesso!'
 
-    })
-    .error( function(err) {
+    }, function(err) {
       $scope.mensagem = 'Não foi possível deletar a foto'
       console.warn(err)
 
